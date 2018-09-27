@@ -1,0 +1,152 @@
+/*公共样式*/
+
+html,
+body {
+  font-family: '思源黑体' !important;
+  background-image: url('../images/back.jpg');
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 标题 */
+
+.h2 {
+  font-size: 0.6rem;
+  font-weight: 900;
+  padding-top: 0.2rem;
+  display: block;
+  width: 100%;
+}
+
+/* 字体渐变 */
+
+.h2_img {
+  /*渐变背景*/
+  background-image: url('../images/backimg.jpg');
+  background-repeat: no-repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: animation 10s infinite linear alternate;
+  -webkit-animation-direction: animation 10s infinite linear alternate;
+  text-align: center;
+}
+
+@keyframes animation {
+  0% {
+    background-position: 0 0;
+    /*background-position 属性设置背景图像的起始位置。*/
+  }
+  100% {
+    background-position: 70% 70%;
+  }
+}
+
+/* 底部按钮 */
+
+.main_bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: .3rem;
+}
+
+.main_btn {
+  display: inline;
+  padding: .1rem .5rem;
+  font-size: .4rem;
+  font-weight: 900;
+  border: 1px solid #95e2e5;
+  border-radius: 10px;
+}
+
+/* 底部logo */
+
+.logo {
+  width: 1.45rem;
+  height: .5rem;
+  position: absolute;
+  bottom: .1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mask_layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/back.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 19;
+}
+
+.loading {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background-image: url('../images/loading.gif');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+audio {
+  position: absolute;
+  left: -100%;
+  top: -100%;
+}
+
+#music {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: .2rem;
+  top: .2rem;
+}
+
+.on {
+  background-image: url('../images/on.png?1');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: animation_on 5s infinite linear;
+  -webkit-animation-direction: animation_on 5s infinite linear;
+}
+
+@keyframes animation_on {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.off {
+  background-image: url('../images/off.png?1');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@media only screen and (min-width: 751px),
+only screen and (min-device-width:751px) {
+  html,body {
+    width: 414px;
+    height: 736px;
+    margin: 0 auto;
+  }
+}

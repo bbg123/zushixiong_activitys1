@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/media.css">
+  <title>十二星座和什么表最搭？</title>
+  <style>
+    .main {
+      width: 100%;
+      padding-top: 20%;
+      overflow: hidden;
+    }
+
+    .main_title,
+    .main_bottom {
+      font-size: .48rem;
+      opacity: 0;
+    }
+
+    .main_content {
+      width: 100%;
+      margin-top: .2rem;
+      display: flex;
+    }
+
+    .main_content_box {
+      width: 50%;
+      margin: 0 2% 0 10%;
+      box-sizing: border-box;
+      transition: all 1s;
+      transform: translateX(-200%);
+      position: relative;
+    }
+
+    .main_content_box_text {
+      width: 100%;
+      display: flex;
+      text-align: center;
+      font-size: .3rem;
+      font-weight: 900;
+      color: #fff;
+      margin-top: .1rem;
+      padding: 0 10%;
+      box-sizing: border-box;
+    }
+
+    .gender {
+      width: 50%;
+      transition: all 1s;
+      transform: translateX(-200%);
+    }
+
+    .main_content_box img {}
+
+    .main_content_box_right {
+      width: 50%;
+      margin: 0 10% 0 2%;
+      transform: translateX(200%);
+    }
+
+    .main_bottom {
+      margin-top: .2rem;
+    }
+
+    .line1 {
+      height: 4px;
+      background: #fff;
+      position: absolute;
+    }
+
+    .line2 {
+      width: 4px;
+      background: #fff;
+      position: absolute;
+    }
+
+    .top {
+      right: 0;
+      top: 0;
+    }
+
+    .bottom {
+      left: 0;
+      bottom: 0;
+    }
+
+    .left {
+      top: 0;
+      left: 0;
+    }
+
+    .right {
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="h2_img main_title">请选择你的性别!</div>
+    <div class="main_content">
+      <div class="main_content_box" data-aimg="./images/man.png" data-img="./images/mana.png" data-gender="1">
+        <div class="top line1"></div>
+        <div class="left line2"></div>
+        <div class="right line2"></div>
+        <div class="bottom line1"></div>
+        <img src="./images/man.png" alt="">
+
+      </div>
+      <div class="main_content_box main_content_box_right" data-aimg="./images/woman.png" data-img="./images/womana.png" data-gender="2">
+        <div class="top line1"></div>
+        <div class="left line2"></div>
+        <div class="right line2"></div>
+        <div class="bottom line1"></div>
+        <img src="./images/womana.png" alt="">
+
+      </div>
+    </div>
+    <div class="main_content_box_text">
+      <div class="gender">男神</div>
+      <div class="gender" style="transform: translateX(100%);">女神</div>
+    </div>
+  </div>
+
+  <!-- 按钮 -->
+  <div class="main_bottom">
+    <div class="main_btn h2_img">
+      确定
+    </div>
+  </div>
+
+  <!-- 底部logo -->
+  <div class="logo">
+    <img src="./images/logo.png" alt="">
+  </div>
+
+  <!-- 音频 -->
+  <audio id="myMusic" autoplay loop>
+    <source src="./mp3/imy.aac" type="audio/mp3">
+  </audio>
+
+  <div id="music" class="on"></div>
+
+  <div class="loading"></div>
+  <div class="mask_layer"></div>
+
+</body>
+<script src="./jquery.v1.12.4.js"></script>
+<script src="./js/tool.js"></script>
+<script>
+  $('.mask_layer').show()
+  $('.loading').show()
+
+  var gender = 1
+
+
+  window.onload = function () {
+    $('.mask_layer').hide()
+    $('.loading').hide()
+    
+    $('.main_content_box').on('click', function () {
+      let img = $(this).siblings('.main_content_box').data('img')
+      let aimg = $(this).data('aimg')
+      $(this).children('img').attr('src', aimg)
+      $(this).siblings('.main_content_box').children('img').attr('src', img)
+      gender = $(this).data('gender')
+      border($(this))
+    })
+    let obj = hrefObj()
+
+    $('.main_btn').on('click', function () {
+      let currentTime = $('#myMusic').get(0).currentTime
+      let autoplay = $('#music').attr('class')
+      localStorage.setItem('autoplay',autoplay)
+      localStorage.setItem('currentTime',currentTime)
+      window.location.href = `./result.html?xingzuo=${obj.xingzuo}&gender=${gender}`
+    })
+
+    $('.main_content_box').css({
+      transform: 'translateX(0)'
+    })
+    $('.gender').css({
+      transform: 'translateX(0)'
+    })
+    $('.main_title,.main_bottom').animate({
+      opacity: 1
+    }, 1000, function () {
+      border($('.main_content_box')[0])
+    })
+  }
+
+  function border(that) {
+    $(that).children('.top').stop().animate({
+      width: '100%'
+    }, 500, function () {
+      $(that).children('.left').stop().animate({
+        height: '100%'
+      }, 500)
+    })
+
+    $(that).children('.bottom').stop().animate({
+      width: '100%'
+    }, 500, function () {
+      $(that).children('.right').stop().animate({
+        height: '100%'
+      }, 500)
+    })
+
+    $(that).siblings().children('.bottom').stop().animate({
+      width: '0'
+    }, 500, function () {
+      $(that).siblings().children('.right').stop().animate({
+        height: '0'
+      }, 500)
+    })
+
+    $(that).siblings().children('.top').stop().animate({
+      width: '0'
+    }, 500, function () {
+      $(that).siblings().children('.left').stop().animate({
+        height: '0'
+      }, 500)
+    })
+
+  }
+</script>
+
+</html>

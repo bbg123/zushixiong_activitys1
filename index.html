@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/media.css">
+  <title>十二星座和什么表最搭？</title>
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+
+    .main_img {
+      width: 100%;
+      padding: 0.4rem;
+      box-sizing: border-box;
+      position: relative;
+      margin-top: .2rem;
+      overflow: hidden;
+    }
+
+    .main_img1 {
+      transform: translateX(200%);
+      transition: all 1.5s;
+    }
+
+    .main_img2 {
+      width: 60%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-250%, -50%);
+      transition: all 1.5s;
+    }
+
+    .main_text {
+      color: #95e2e5;
+      font-size: 0.3rem;
+      text-align: center;
+      margin-top: .2rem;
+    }
+
+    .main_bottom1 {
+      display: flex;
+      justify-content: center;
+      margin-top: .1rem;
+    }
+
+    .main_back {
+      font-size: 20px;
+      color: #95e2e5;
+      border-bottom: 1px solid #95e2e5;
+    }
+    
+    .show {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 头部标题 -->
+  <div class="h2 h2_img show">十二星座
+    <br>和什么表最搭？</div>
+
+  <!-- 内容图片 -->
+  <div class="main_img">
+    <img class="main_img1" style="opacity: .4;" src="./images/shoubiao (2).png" alt="">
+    <div class="main_img2">
+      <img src="./images/shoubiao (1).png" alt="">
+    </div>
+  </div>
+
+  <div class="main_text show">
+    测过的人都说准确率高达99.99%哦!
+  </div>
+
+  <!-- 按钮 -->
+  <div class="main_bottom">
+    <div class="main_btn h2_img show">
+      开始测试
+    </div>
+  </div>
+  <div class="main_bottom1">
+    <div class="main_back show">
+      回到首页
+    </div>
+  </div>
+
+
+  <!-- 底部logo -->
+  <div class="logo">
+    <img src="./images/logo.png" alt="">
+  </div>
+
+  <!-- 音频 -->
+  <audio id="myMusic" loop>
+    <source src="./mp3/imy.aac" type="audio/mp3">
+  </audio>
+
+  <div id="music"></div>
+
+  <div class="loading"></div>
+  <div class="mask_layer"></div>
+
+</body>
+<script src="./jquery.v1.12.4.js"></script>
+<script src="./js/tool.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script>
+  $('.mask_layer').show()
+  $('.loading').show()
+  localStorage.setItem('currentTime',0)
+
+  let obj = hrefObj()
+  localStorage.setItem('token', obj.token)
+
+  $('.main_btn').on('click', function () {
+    let currentTime = $('#myMusic').get(0).currentTime
+    let autoplay = $('#music').attr('class')
+    localStorage.setItem('autoplay', autoplay)
+    localStorage.setItem('currentTime', currentTime)
+    window.location.href = './zp.html'
+  })
+  window.onload = function () {
+
+
+    $('.mask_layer').hide()
+    $('.loading').hide()
+    $("#myMusic").get(0).play()
+    $('#music').attr('class', 'on')
+    $('.h2_img,.main_btn,.main_back').fadeIn(1500)
+    $('.main_img1').css({
+      transform: 'translateX(0)'
+    })
+    $('.main_img2').css({
+      transform: 'translate(-50%,-50%)'
+    })
+    $('.main_back').on('click',function() {
+      wx.miniProgram.switchTab({
+        url: '/pages/Home/home'
+      })
+      return false
+    })
+  }
+</script>
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?7aa8d5c08ce058768dc025f2ada0fc0f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+</html>

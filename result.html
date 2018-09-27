@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/common.css?123">
+  <link rel="stylesheet" href="./css/media.css">
+  <title>十二星座和什么表最搭？</title>
+  <style>
+    .main {
+      width: 100%;
+      height: 90%;
+      padding: .4rem .4rem 0;
+      box-sizing: border-box;
+    }
+
+    .back {
+      width: 100%;
+      height: 100%;
+      background: url('./images/bg.jpg') no-repeat center bottom;
+      background-size: 100% 100%;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main_title {
+      display: flex;
+      padding-left: .5rem;
+      align-items: center;
+      font-size: .28rem;
+      height: 10%;
+    }
+
+    .main_title_icon {
+      width: .6rem;
+      height: .6rem;
+      margin-right: 0.1rem;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .goods_name {
+      font-size: .5rem;
+      font-weight: 900;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 7%;
+    }
+
+    .goods {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      height: 45%;
+    }
+
+    .goods_img_xz {
+      background-size: 101% 101%;
+      width: 80%;
+    }
+
+    .goods_goodsimg {
+      width: 45%;
+      position: absolute;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .comment {
+      padding-left: .5rem;
+      height: 28%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .comment1 {
+      font-size: .28rem;
+    }
+
+    .comment2 {
+      font-size: .45rem;
+    }
+
+    .comment3 {
+      font-size: .45rem;
+      font-weight: 900;
+    }
+
+    .floor {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 10%;
+      font-size: .28rem;
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .floor_btn {
+      padding: .1rem .3rem;
+      border: 1px solid #fff;
+      border-radius: 5px;
+    }
+
+    .main_bottom2 {
+      position: absolute;
+      width: 100%;
+      height: 10%;
+      left: 0;
+      bottom: .1rem;
+      font-size: .1rem;
+      padding: 0 calc(15% + .55rem) 0 .5rem;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .main_bottom_logo {
+      width: 50%;
+    }
+
+    .main_bottom_ewm {
+      width: 15%;
+      position: absolute;
+      right: .5rem;
+      bottom: 0;
+    }
+
+    .main_bottom_text2 {
+      text-align: right;
+    }
+
+    canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .res_img {
+      width: 80%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      display: none;
+    }
+
+    .tip {
+      position: absolute;
+      left: 50%;
+      top: .2rem;
+      transform: translateX(-50%);
+      font-size: .5rem;
+      font-weight: 700;
+      color: #fff;
+      z-index: 20;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 内容 -->
+  <div class="main">
+    <div class="back" id="back">
+      <div class="main_title">
+        <div class="main_title_icon">
+        </div>
+        <div class="name">
+        </div>
+      </div>
+      <div class="goods_name">
+      </div>
+      <div class="goods">
+        <div class="goods_img_xz"></div>
+        <div class="goods_goodsimg">
+
+        </div>
+      </div>
+      <div class="comment">
+        <div class="comment1"></div>
+        <div class="comment2"></div>
+        <div class="comment3"></div>
+      </div>
+      <div class="main_bottom2">
+        <div class="main_bottom_logo">
+          <img style="width: 60%;" src="./images/bglogo.png?5" alt="">
+        </div>
+        <div class="main_bottom_text2">
+          扫一扫
+          <br> 测试我适合戴什么表
+        </div>
+        <div class="main_bottom_ewm">
+          <img src="./images/ewm.png?5" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="floor">
+    <div class="floor_btn" id="argin">再测一次</div>
+    <div class="floor_btn" id="go">1元租表</div>
+    <a class="floor_btn" id="btn">生成图片</a>
+  </div>
+
+  <div class="res_img"></div>
+
+  <div class="mask_layer"></div>
+
+  <div class="tip">长按图片保存</div>
+
+  <div class="loading"></div>
+
+  <!-- 音频 -->
+  <audio id="myMusic" autoplay loop>
+    <source src="./mp3/imy.aac" type="audio/mp3">
+  </audio>
+
+  <div id="music" class="on"></div>
+
+</body>
+<script src="./jquery.v1.12.4.js"></script>
+<script src="./html2canvas.js"></script>
+<script src="./js/tool.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script>
+  let obj = hrefObj()
+  var flag = true
+
+  $('.loading').show()
+  $('.mask_layer').show()
+
+  getdata('https://www.zushixiong.com/api/activity/test1808', {
+    act: 'get',
+    xingzuo: obj.xingzuo,
+    gender: obj.gender
+  }, function (res) {
+    if (res.code == 0) {
+      $('.name').html(res.data.title)
+      $('.comment1').html(res.data.text1)
+      $('.comment2').html(res.data.text2)
+      $('.comment3').html(res.data.text3)
+      $('.goods_name').html(res.data.brand_name)
+      $('.goods_goodsimg').html(`<img src="${res.data.goods_img}" alt="">`)
+      $('.goods_img_xz').html(`<img src="./images/xingzuo/${obj.xingzuo}.png" alt="">`)
+
+      if (res.data.avatar != '') {
+        $('.main_title_icon').html(`<img src="${res.data.avatar}" alt="">`)
+      } else {
+        $('.main_title_icon').html(`<img src="./images/noavatar.png" alt="">`)
+      }
+
+      setTimeout(() => {
+
+      }, 1000)
+
+    } else {
+      alert('获取数据失败,请重试')
+    }
+  })
+
+
+
+  window.onload = function () {
+
+    $('.loading').hide()
+    $('.mask_layer').hide()
+
+
+    $('#argin').on('click', function () {
+      window.location.href = './index.html?token=' + localStorage.getItem("token")
+    })
+
+    $('#go').on('click', function () {
+      wx.miniProgram.switchTab({
+        url: '/pages/Home/home'
+      })
+    })
+
+
+    var res_img = ''
+    $('#btn').on('click', function () {
+      $('.loading').show()
+      $('.mask_layer').show()
+      if (flag) {
+        flag = false
+        if (res_img == '') {
+          html2canvas($('#back')[0], {
+            useCORS: true
+          }).then(function (canvas) {
+            base64 = canvas.toDataURL('image/jpeg', .8)
+            getdata('https://www.zushixiong.com/api/activity/test1808', {
+              act: 'upload',
+              file: base64
+            }, function (res) {
+              $('.loading').hide()
+              $('.tip').fadeIn()
+              $('.close').fadeIn()
+              $('.res_img').html(`<img src="${res.http_url}" alt="">`).fadeIn()
+              res_img = res.http_url
+            })
+          })
+        } else {
+          $('.loading').hide()
+          $('.tip').fadeIn()
+          $('.close').fadeIn()
+          $('.res_img').html(`<img src="${res_img}" alt="">`).fadeIn()
+        }
+      }
+    })
+
+    $('.res_img').on('click', function () {
+      $('.res_img').fadeOut()
+      $('.mask_layer').fadeOut()
+      $('.tip').fadeOut()
+      flag = true
+    })
+
+  }
+</script>
+
+</html>
